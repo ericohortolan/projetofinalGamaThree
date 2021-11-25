@@ -1,5 +1,5 @@
 <h1 align="center">
-<img src="https://imgur.com/ZomXVbq" title="Grupo Three" />
+<img src="https://i.imgur.com/ZomXVbq.png" title="Grupo Three" />
 </h1>
 
 <h3 align="center">
