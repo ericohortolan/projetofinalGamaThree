@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'AMI_ID', defaultValue: '', description: 'id da ami do ubuntu')
         string(name: 'DB_PASSWORD', defaultValue: '', description: 'Senha para database')
     }
 

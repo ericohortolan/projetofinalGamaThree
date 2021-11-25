@@ -3,7 +3,7 @@
 cd 04-pipelineSQL/terraform
 terraform init
 # AMI ubuntu
-TF_VAR_amiId=$AMI_ID terraform apply -auto-approve
+terraform apply -auto-approve
 
 echo "Aguardando criação de maquinas ..."
 sleep 10 # 10 segundos
