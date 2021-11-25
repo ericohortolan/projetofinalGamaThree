@@ -16,7 +16,7 @@
       shell: kubectl apply -f ~/deployment-stage.yml
 
     - name: "Aplicar nodeport stage"
-      shell: kubectl apply -f ~/nodeport-javadb-stage.yml
+      shell: kubectl apply -f ~/nodeport-javadb-stag.yml
 
     - shell: "kubectl get pods | grep java-deployment-stag"
       register: ps
