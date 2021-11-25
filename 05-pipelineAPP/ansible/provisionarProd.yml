@@ -7,16 +7,16 @@
         dest: "~/"
 
     - name: "Aplicar configmap prod"
-      shell: kubectl apply -f ~/mysql-configmap-prod.yml
+      shell: kubectl apply -f ~/k8s-deploy/mysql-configmap-prod.yml
 
     - name: "Aplicar secret"
-      shell: kubectl apply -f ~/mysql-secret.yml
+      shell: kubectl apply -f ~/k8s-deploy/mysql-secret.yml
 
     - name: "Aplicar deployment prod"
-      shell: kubectl apply -f ~/deployment-prod.yml
+      shell: kubectl apply -f ~/k8s-deploy/deployment-prod.yml
 
     - name: "Aplicar nodeport prod"
-      shell: kubectl apply -f ~/nodeport-javadb-prod.yml
+      shell: kubectl apply -f ~/k8s-deploy/nodeport-javadb-prod.yml
 
     - shell: "kubectl get pods | grep java-deployment-prod"
       register: ps

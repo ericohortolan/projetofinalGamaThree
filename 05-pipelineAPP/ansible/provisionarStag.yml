@@ -7,16 +7,16 @@
         dest: "~/"
 
     - name: "Aplicar configmap stage"
-      shell: kubectl apply -f ~/mysql-configmap-stag.yml
+      shell: kubectl apply -f ~/k8s-deploy/mysql-configmap-stage.yml
 
     - name: "Aplicar secret"
-      shell: kubectl apply -f ~/mysql-secret.yml
+      shell: kubectl apply -f ~/k8s-deploy/mysql-secret.yml
 
     - name: "Aplicar deployment stage"
-      shell: kubectl apply -f ~/deployment-stag.yml
+      shell: kubectl apply -f ~/k8s-deploy/deployment-stage.yml
 
     - name: "Aplicar nodeport stage"
-      shell: kubectl apply -f ~/nodeport-javadb-stag.yml
+      shell: kubectl apply -f ~/k8s-deploy/nodeport-javadb-stage.yml
 
     - shell: "kubectl get pods | grep java-deployment-stag"
       register: ps

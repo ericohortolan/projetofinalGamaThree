@@ -11,13 +11,13 @@
       shell: kubectl apply -f ~/k8s-deploy/mysql-configmap-dev.yml
 
     - name: "Aplicar secret"
-      shell: kubectl apply -f ~/mysql-secret.yml
+      shell: kubectl apply -f ~/k8s-deploy/mysql-secret.yml
 
     - name: "Aplicar deployment dev"
-      shell: kubectl apply -f ~/deployment-dev.yml
+      shell: kubectl apply -f ~/k8s-deploy/deployment-dev.yml
 
     - name: "Aplicar nodeport dev"
-      shell: kubectl apply -f ~/nodeport-javadb-dev.yml
+      shell: kubectl apply -f ~/k8s-deploy/nodeport-javadb-dev.yml
 
     - shell: "kubectl get pods | grep java-deployment-dev"
       register: ps
