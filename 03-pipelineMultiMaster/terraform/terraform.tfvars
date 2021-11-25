@@ -1,9 +1,9 @@
 # amiId = "ami-0385bca6c4abbdd13" #AMI kubernets
 subnets = [
-    "subnet-0520a425044ec61a6",
-    "subnet-00a62311a8fdf6895",
-    "subnet-0cde2b21259997493"
+    "subnet-0aede235b1d5f1c3b",
+    "subnet-00dcd6d7b47c97dcc",
+    "subnet-0551421f7dddf311e"
   ]
-vpcId = "vpc-0530e1ffb643de5d0" #vpc-erico
+vpcId = "vpc-0530e1ffb643de5d0" #vpc-projetofinal
 #chave = "chave-key-erika"
 chave = "erico-keypar"
