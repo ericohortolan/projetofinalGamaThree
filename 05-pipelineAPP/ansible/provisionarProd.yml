@@ -1,14 +1,11 @@
 - hosts: all
-  environment:
-    DB_PASSWORD: "{{ lookup('env', 'DB_PASSWORD') }}"
-    SQL_PROD: "{{ lookup('env', 'SQL_PROD') }}"
-
   become: yes
   tasks:
     - name: "Upload k8s-deploy"
       copy:
         src: "k8s-deploy"
         dest: "~/"
+        
     - name: "Aplicar configmap prod"
       shell: kubectl apply -f ~/mysql-configmap-prod.yml
 

@@ -1,8 +1,4 @@
 - hosts: all
-  environment:
-    DB_PASSWORD: "{{ lookup('env', 'DB_PASSWORD') }}"
-    SQL_STAG: "{{ lookup('env', 'SQL_STAG') }}"
-
   become: yes
   tasks:
     - name: "Upload k8s-deploy"

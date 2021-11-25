@@ -1,23 +1,11 @@
 - hosts: all
-  environment:
-    DB_PASSWORD: "{{ lookup('env', 'DB_PASSWORD') }}"
-    SQL_DEV: "{{ lookup('env', 'SQL_DEV') }}"
-
   become: yes
   tasks:
-    # - name: "Upload k8s-deploy"
-      # copy:
-        # src: "k8s-deploy"
-        # dest: "~/"
-    
     
     - name: "Upload k8s-deploy"
-      template:
-        src: '{{ item.src }}'
-        dest: ~/{{ item.path }}
-        force: yes
-      with_filetree: k8s-deploy/
-      when: item.state == 'file'
+      copy:
+        src: "k8s-deploy"
+        dest: "~/"
 
     - name: "Aplicar configmap dev"
       shell: kubectl apply -f ~/k8s-deploy/mysql-configmap-dev.yml
