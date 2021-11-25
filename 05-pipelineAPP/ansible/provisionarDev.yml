@@ -11,7 +11,7 @@
         dest: "~/"
 
     - name: "Aplicar configmap dev"
-      shell: kubectl apply -f ~/mysql-configmap-dev.yml
+      shell: kubectl apply -f ~/k8s-deploy/mysql-configmap-dev.yml
 
     - name: "Aplicar secret"
       shell: kubectl apply -f ~/mysql-secret.yml
