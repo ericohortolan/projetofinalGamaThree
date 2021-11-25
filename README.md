@@ -1,5 +1,5 @@
 <h1 align="center">
-<img src="https://i.imgur.com/uSa5r48.png" title="Grupo Agora Vai" />
+<img src="https://i.imgur.com/MqUnxEt.png" title="Grupo Agora Vai" />
 </h1>
 
 <h3 align="center">
