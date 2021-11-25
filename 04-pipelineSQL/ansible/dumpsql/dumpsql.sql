@@ -13,3 +13,6 @@ CREATE TABLE `administradores` (
 insert into administradores(email, nome, observacao, senha)values('danilo@teste.com', 'danilo', 'treinamento k8s', '123456');
 
 select * from administradores;
+
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%';
+FLUSH PRIVILEGES;
