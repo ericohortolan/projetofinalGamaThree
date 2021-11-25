@@ -3,7 +3,7 @@
 cd 04-pipelineSQL/terraform
 terraform init
 # AMI ubuntu
-TF_VAR_amiId="ami-054a31f1b3bf90920" terraform apply -auto-approve
+TF_VAR_amiId=$AMI_ID terraform apply -auto-approve
 
 echo "Aguardando criação de maquinas ..."
 sleep 10 # 10 segundos
@@ -21,7 +21,15 @@ sleep 10 # 10 segundos
 
 cd ../ansible
 
+echo $"[client]" > dumsql/.my.cnf
+echo $"user=root" >> dumsql/.my.cnf
+echo $"password=$PASSWORD" >> dumsql/.my.cnf
+
 #ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i hosts provisionar.yml -u ubuntu --private-key ~/.ssh/chaveprivada.pem
 
 echo "Executando ansible ::::: [ ansible-playbook -i hosts provisionar.yml -u ubuntu --private-key /var/lib/jenkins/.ssh/id_rsa ]"
 ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i hosts provisionar.yml -u ubuntu --private-key /var/lib/jenkins/.ssh/id_rsa
+
+echo $"[client]" > dumsql/.my.cnf
+echo $"user=root" >> dumsql/.my.cnf
+echo $"password=" >> dumsql/.my.cnf

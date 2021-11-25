@@ -1,26 +1,41 @@
 pipeline {
     agent any
 
+    parameters {
+        string(name: 'DB_IP', defaultValue: '', description: 'IP do database para teste do pacote')
+        password(name: 'DB_PASSWORD', defaultValue: '', description: 'Senha do database para teste do pacote')  
+    }
 
     stages {
         
+        stage('Clone Infra') {
+            steps {
+                git url: 'https://github.com/ericohortolan/projetofinalGamaThree', branch: 'main'
+            }
+        }
+
         stage('Clone App') {
             steps {
                 // Get some code from a GitHub repository
-                sh 'rm -rf spring-web-youtube && git clone https://github.com/torneseumprogramador/spring-web-youtube.git'
+                //sh 'rm -rf spring-web-youtube && git clone https://github.com/torneseumprogramador/spring-web-youtube.git'
+                sh 'rm -rf app-code'
+                sh 'mkdir app-code && cd app-code'
+                dir ('app-code'){
+                    git url: 'https://github.com/torneseumprogramador/spring-web-youtube.git', branch: 'deploy-docker'
+                }
             }
         }
 
         stage('Build App') {
             steps {
-                sh 'cd spring-web-youtube && ./mvnw package'
+                sh 'cd app-code && ./mvnw package -Dmaven.test.skip -DskipTests -Dmaven.javadoc.skip=true'
                 echo 'Building..'
             }
         }
 
         stage('Test App') {
             steps {
-                sh 'cd spring-web-youtube && ./mvnw test'
+                sh "export USER=root && export PASSWORD=\"$DB_PASSWORD\" && export DATABASE_URL='mysql://$DB_IP:3306/SpringWebYoutubeTest?useTimezone=true&serverTimezone=UTC' && cd app-code && ./mvnw test"
                 echo 'Testing....'
                 //sh 'nohup ./start.sh &'
                 //echo ' Starting....'
@@ -29,7 +44,7 @@ pipeline {
 
         stage('Create and Push Docker image') {
             steps {
-                sh "cd spring-web-youtube && docker build -t ericovh/projetofinal-spr-web -f Dockerfile . && docker push ericovh/projetofinal-spr-web"
+                sh "cd app-code && docker build -t ericovh/projetofinal-spr-web -f Dockerfile . && docker push ericovh/projetofinal-spr-web"
                 echo 'pushing docker image..'
             }
         }
