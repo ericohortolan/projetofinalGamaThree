@@ -15,12 +15,12 @@ resource "aws_instance" "dev_img_kubernetes" {
   tags = {
     Name = "dev-img-kubernetes"
   }
-  vpc_security_group_ids = [aws_security_group.acesso_img_kubernetes.id]
+  vpc_security_group_ids = [aws_security_group.projetofinal_kubernetes.id]
 }
 
-resource "aws_security_group" "acesso_img_kubernetes" {
-  name        = "acesso_img_kubernetes"
-  description = "acesso_img_kubernetes inbound traffic"
+resource "aws_security_group" "projetofinal_kubernetes" {
+  name        = "projetofinal_kubernetes"
+  description = "projetofinal_kubernetes inbound traffic"
   vpc_id      = "${var.vpcId}"
 
   ingress = [
@@ -63,7 +63,7 @@ resource "aws_security_group" "acesso_img_kubernetes" {
   ]
 
   tags = {
-    Name = "acesso_img_kubernetes"
+    Name = "projetofinal_kubernetes"
   }
 }
 
