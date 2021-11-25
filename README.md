@@ -32,10 +32,10 @@ Meta:<br><BR>
 </br>
 
 ### 💻 Desenvolvedores
-- [Erico](https://github.com/jhsmiranda)
-- [Erika](https://github.com/gustavolening)
-- [Fábio](https://github.com/fdutrac)
-- [Felipe](https://github.com/flipdantas)
+- [Erico](https://linkedin.com/in/erico-hortolan/)
+- [Erika](https://www.linkedin.com/in/%C3%A9rika-maruya-89940512b/)
+- [Fábio](https://www.linkedin.com/in/fabiorlopes/)
+- [Felipe](https://www.linkedin.com/in/felipe-de-castro-geraldo-9893bb95/)
 
 ## 🚀 Tecnologias
 
