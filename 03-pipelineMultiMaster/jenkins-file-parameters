@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'AMI_ID', defaultValue: '', description: 'id da ami do kubernets')
+    }
+
+    stages {
+        stage('Clone repo') {
+            steps {
+                git url: 'https://github.com/ericohortolan/projetofinalGamaThree', branch: 'main'
+            }
+        }
+        stage('Build Cluster') {
+            steps {
+                sh "03-pipelineMultiMaster/deploy.sh"
+            }
+        }
+        stage('Test Cluster') {
+            steps {
+                sh '03-pipelineMultiMaster/test.sh'
+            }
+        }
+    }
+}

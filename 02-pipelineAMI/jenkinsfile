@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone repo') {
+            steps {
+                git url: 'https://github.com/ericohortolan/projetofinalGamaThree', branch: 'main'
+            }
+        }
+        stage('Build EC2') {
+            steps {
+                sh "02-pipelineAMI/deploy.sh"
+            }
+        }
+        stage('Test kubernetes e docker') {
+            steps {
+                sh "02-pipelineAMI/test.sh"
+            }
+        }
+        stage('Creating ami') {
+            steps {
+                sh "02-pipelineAMI/package-ami.sh"
+            }
+        }
+        stage('Destroy') {
+            steps {
+                sh "02-pipelineAMI/destroy.sh"
+            }
+        }
+    }
+}

@@ -1,0 +1,81 @@
+- hosts: all
+  environment:
+    PASSWORD: "{{ lookup('env', 'PASSWORD') }}"
+    USER: "{{ lookup('env', 'USER') }}"
+
+  tasks:
+    - name: "Roda: sudo apt update"
+      become: yes
+      apt:
+        update_cache: yes
+        #upgrade: yes
+
+    - name: "Instala pacotes"
+      apt:
+        name: "{{ item }}"
+        state: latest
+      become: yes # roda com sudo
+      with_items:
+        - mysql-server
+        - python3-pycurl
+        - python3-mysqldb
+
+
+    - name: "Lavanta serviço do mysql"
+      become: yes
+      service:
+        name: mysql
+        state: started
+    
+    - name: "Alterando senha usuario SQL"
+      become: yes
+      mysql_user:
+        #login_password: "{{ lookup('env', 'PASSWORD') }}"
+        name: "{{ lookup('env', 'USER') }}"
+        host: localhost
+        password: "{{ lookup('env', 'PASSWORD') }}"
+        priv: "*.*:ALL,GRANT"
+        state: present
+        check_implicit_admin: true
+
+    - name: "Cria o banco de dados MySQL"
+      mysql_db:
+        name: SpringWebYoutube
+        login_user: "{{ lookup('env', 'USER') }}"
+        login_password: "{{ lookup('env', 'PASSWORD') }}"
+        state: present
+
+
+    #- name: Adicionar User no bashrc
+    #  lineinfile: dest=~/.bashrc line='export USER={{ lookup('env', 'USER') }}' state=present
+
+    #- name: Adicionar Pass no bashrc
+    #  lineinfile: dest=~/.bashrc line='export PASSWORD="{{ lookup('env', 'PASSWORD') }}"' state=present
+
+    #- name: Adicionar DB no bashrc
+    #  lineinfile: dest=~/.bashrc line='export DATABASE_URL="{{ lookup('env', 'DATABASE_URL') }}"' state=present
+
+    #- name: Faz o package
+    #  shell: "cd ~/projetoturma2/spring-web-youtube/ && mvn package"
+
+    #- name: Finaliza processo
+    #  shell: "if lsof -t -i:8080 ; then sudo kill -9 $(lsof -t -i:8080); fi"
+
+    #- name: Inicia o projeto
+    #  shell: "cd ~/projetoturma2/spring-web-youtube/ && nohup ./mvnw spring-boot:run &"
+
+    - name: "Copia Dump MySQL"
+      copy:
+        src: "dumpsql/dumpsql.sql"
+        dest: "/tmp/dumpsql.sql"
+    
+    #- name: "Faz copia do dump para DB"
+    #  mysql_db:
+    #    state: import
+    #    login_user: "{{ lookup('env', 'USER') }}"
+    #    login_password: "{{ lookup('env', 'PASSWORD') }}"
+    #    name: all
+    #    target: /tmp/dump.sql
+
+    - name: "Copia Dump MySQL"
+      shell: "mysql -u {{ lookup('env', 'USER') }} -p\"{{ lookup('env', 'PASSWORD') }}\" < /tmp/dumpsql.sql"
