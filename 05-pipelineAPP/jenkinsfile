@@ -1,12 +1,12 @@
 pipeline {
     agent any
 
-    parameters {
-        password(name: 'DB_PASSWORD', defaultValue: '', description: 'Senha do database')  
-        string(name: 'SQL_DEV', defaultValue: '', description: 'IP do database de DEV')
-        string(name: 'SQL_STAG', defaultValue: '', description: 'IP do database de DEV')
-        string(name: 'SQL_PROD', defaultValue: '', description: 'IP do database de DEV')
-    }
+    // parameters {
+    //     password(name: 'DB_PASSWORD', defaultValue: '', description: 'Senha do database')  
+    //     string(name: 'SQL_DEV', defaultValue: '', description: 'IP do database de DEV')
+    //     string(name: 'SQL_STAG', defaultValue: '', description: 'IP do database de DEV')
+    //     string(name: 'SQL_PROD', defaultValue: '', description: 'IP do database de DEV')
+    // }
 
     stages {
         
