@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'DB_PASSWORD', defaultValue: '', description: 'Senha para database')
+        password(name: 'DB_PASSWORD', defaultValue: '', description: 'Senha para database')
     }
 
     stages {
