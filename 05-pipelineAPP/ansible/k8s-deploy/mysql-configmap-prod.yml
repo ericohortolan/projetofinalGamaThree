@@ -4,8 +4,8 @@ metadata:
   name: mysql-configmap-prod
 data:
   USER: root
-  PASSWORD: {{ lookup('env', 'DB_PASSWORD')}}
-  DATABASE_URL: mysql://{{ lookup('env', 'SQL_PROD') }}:3306/SpringWebYoutubeTest?useTimezone=true&serverTimezone=UTC
+  PASSWORD: {{ DB_PASSWORD }}
+  DATABASE_URL: mysql://{{ SQL_PROD }}:3306/SpringWebYoutubeTest?useTimezone=true&serverTimezone=UTC
   
   
   # DATABASE_URL: mysql://10.111.41.255:3306/SpringWebYoutubeTest?useTimezone=true&serverTimezone=UTC # caso esteja vinculando um clusterIP na mão
