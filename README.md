@@ -72,5 +72,5 @@ Funcionalidades que o sistema oferece:
 - Criação automática de Imagem (AMI) baseada em script Terraform/Ansible
 - Criação de Infra Multi Master com 3 Máquinas Master, 3 Work Nodes e HAProxy
 - Criação de Máquinas MySql em rede privada
-- Criação de container para aplicação Java
+- Criação de container Docker para aplicação Java
 - Deploy de container no cluster Kubernets Multi Master
