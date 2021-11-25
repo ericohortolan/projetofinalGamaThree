@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_ami_from_instance" "ami-projetofinal" {
-  name               = "terraform-projeto-erico-${var.versao}"
+  name               = "terraform-projetofinal-${var.versao}"
   source_instance_id = var.resource_id
 }
 
