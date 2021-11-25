@@ -13,11 +13,13 @@ pipeline {
         }
         stage('Build Cluster') {
             steps {
-                sh "03-pipelineMultiMaster/deploy.sh"
+                sh 'chmod +x 03-pipelineMultiMaster/deploy.sh'
+                sh '03-pipelineMultiMaster/deploy.sh'
             }
         }
         stage('Test Cluster') {
             steps {
+                sh 'chmod +x 03-pipelineMultiMaster/test.sh'
                 sh '03-pipelineMultiMaster/test.sh'
             }
         }

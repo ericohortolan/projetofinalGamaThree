@@ -3,11 +3,11 @@ provider "aws" {
 }
 
 resource "aws_instance" "dev_img_kubernetes" {
-  subnet_id                   = "subnet-0e6a2c0827160332c"
-  ami                         = "ami-0cf8150492903d1d2"
+  subnet_id                   = "${var.subnetId}"
+  ami                         = "${var.amiId}"
   instance_type = "t2.large"
   associate_public_ip_address = true
-  key_name                    = "erico-keypar"
+  key_name                    = "${var.chave}"
   root_block_device {
     encrypted   = true
     volume_size = 30
@@ -21,7 +21,7 @@ resource "aws_instance" "dev_img_kubernetes" {
 resource "aws_security_group" "acesso_img_kubernetes" {
   name        = "acesso_img_kubernetes"
   description = "acesso_img_kubernetes inbound traffic"
-  vpc_id      = "vpc-010ad4cd4b8ad8a3c"
+  vpc_id      = "${var.vpcId}"
 
   ingress = [
     {
@@ -65,6 +65,22 @@ resource "aws_security_group" "acesso_img_kubernetes" {
   tags = {
     Name = "acesso_img_kubernetes"
   }
+}
+
+variable "vpcId" {
+  type        = string
+}
+
+variable "subnetId" {
+  type        = string
+}
+
+variable "chave" {
+  type        = string
+}
+
+variable "amiId" {
+  type        = string
 }
 
 # terraform refresh para mostrar o ssh
