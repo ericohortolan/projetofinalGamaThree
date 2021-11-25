@@ -54,21 +54,21 @@ pipeline {
         stage('Deploy Dev') {
             steps {
                 sh 'chmod +x 05-pipelineAPP/deployDev.sh'
-                sh "04-pipelineSQL/deployDev.sh"
+                sh "05-pipelineAPP/deployDev.sh"
             }
         }
 
         stage('Deploy Stag') {
             steps {
                 sh 'chmod +x 05-pipelineAPP/deployStag.sh'
-                sh "04-pipelineSQL/deployStag.sh"
+                sh "05-pipelineAPP/deployStag.sh"
             }
         }
 
         stage('Deploy Prod') {
             steps {
                 sh 'chmod +x 05-pipelineAPP/deployProd.sh'
-                sh "04-pipelineSQL/deployProd.sh"
+                sh "05-pipelineAPP/deployProd.sh"
             }
         }
     }
