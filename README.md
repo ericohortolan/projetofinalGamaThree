@@ -47,6 +47,8 @@ Tecnologias que utilizamos para desenvolver este Projeto:
 - [Terraform](https://www.terraform.io/)
 - [Ansible](https://www.ansible.com/)
 - [Jenkins](https://www.jenkins.io/)
+- [Kubernets](https://kubernetes.io/)
+- [Docker](https://www.docker.com/)
 
 ## 💻 Iniciando
 
