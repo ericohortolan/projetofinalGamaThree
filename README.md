@@ -61,14 +61,8 @@ Tecnologias que utilizamos para desenvolver este Projeto:
 **Clone o projeto e acesse a pasta**
 
 ```bash
-$ git clone https://github.com/yyy/xxx/ && cd xxx
+$ git clone https://github.com/ericohortolan/projetofinalGamaThree.git
 ```
-
-**Siga as etapas abaixo**
-
-xxx
-
-xxx
 
 Tudo pronto! 
 
@@ -76,6 +70,7 @@ Tudo pronto!
 ## ⚙️ Funcionalidades
 Funcionalidades que o sistema oferece:
 - Criação automática de Imagem (AMI) baseada em script Terraform/Ansible
-- Criação de Infra Multi Master com 3 Máquinas Master, 4 Nodes, HAProxy
+- Criação de Infra Multi Master com 3 Máquinas Master, 3 Work Nodes e HAProxy
 - Criação de Máquinas MySql em rede privada
-- Deploy de Sistema
+- Criação de container para aplicação Java
+- Deploy de container no cluster Kubernets Multi Master
