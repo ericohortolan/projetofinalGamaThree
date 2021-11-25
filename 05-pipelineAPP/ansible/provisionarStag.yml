@@ -18,9 +18,8 @@
     - name: "Aplicar nodeport stage"
       shell: kubectl apply -f ~/nodeport-javadb-stage.yml
 
-    - name: "Verifica pod Stag"
-      shell: "kubectl get pods | grep java-deployment-stag"
+    - shell: "kubectl get pods | grep java-deployment-stag"
       register: ps
-      debug:
-          msg: " '{{ ps.stdout_lines }}' "
+    - debug:
+        msg: " '{{ ps.stdout_lines }}' "
 # ansible-playbook -i hosts provisionar.yml -u ubuntu --private-key ~/Desktop/devops/treinamentoItau

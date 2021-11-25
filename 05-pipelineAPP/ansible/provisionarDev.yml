@@ -19,9 +19,8 @@
     - name: "Aplicar nodeport dev"
       shell: kubectl apply -f ~/nodeport-javadb-dev.yml
 
-    - name: "Verifica pod DEV"
-      shell: "kubectl get pods | grep java-deployment-dev"
+    - shell: "kubectl get pods | grep java-deployment-dev"
       register: ps
-      debug:
-          msg: " '{{ ps.stdout_lines }}' "
+    - debug:
+        msg: " '{{ ps.stdout_lines }}' "
 # ansible-playbook -i hosts provisionar.yml -u ubuntu --private-key ~/Desktop/devops/treinamentoItau

@@ -18,9 +18,8 @@
     - name: "Aplicar nodeport prod"
       shell: kubectl apply -f ~/nodeport-javadb-prod.yml
 
-    - name: "Verifica pod Prod"
-      shell: "kubectl get pods | grep java-deployment-prod"
+    - shell: "kubectl get pods | grep java-deployment-prod"
       register: ps
-      debug:
-          msg: " '{{ ps.stdout_lines }}' "
+    - debug:
+        msg: " '{{ ps.stdout_lines }}' "
 # ansible-playbook -i hosts provisionar.yml -u ubuntu --private-key ~/Desktop/devops/treinamentoItau
