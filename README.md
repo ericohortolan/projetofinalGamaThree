@@ -1,9 +1,9 @@
 <h1 align="center">
-<img src="https://i.imgur.com/uSa5r48.png" title="Grupo Three" />
+<img src="https://i.imgur.com/uSa5r48.png" title="Grupo Agora Vai" />
 </h1>
 
 <h3 align="center">
-  Grupo Three
+  Grupo Agora Vai
 </h3>
 
 <p align="center">
