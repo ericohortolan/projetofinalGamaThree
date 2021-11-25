@@ -1,0 +1,29 @@
+- hosts: all
+  environment:
+    DB_PASSWORD: "{{ lookup('env', 'DB_PASSWORD') }}"
+    SQL_STAG: "{{ lookup('env', 'SQL_STAG') }}"
+
+  become: yes
+  tasks:
+    - name: "Upload k8s-deploy"
+      copy:
+        src: "k8s-deploy"
+        dest: "~/"
+
+    - name: "Aplicar configmap stage"
+      shell: kubectl apply -f ~/mysql-configmap-stage.yml
+
+    - name: "Aplicar secret"
+      shell: kubectl apply -f ~/mysql-secret.yml
+
+    - name: "Aplicar deployment stage"
+      shell: kubectl apply -f ~/deployment-stage.yml
+
+    - name: "Aplicar nodeport stage"
+      shell: kubectl apply -f ~/nodeport-javadb-stage.yml
+
+    - shell: "kubectl get pods | grep mysql"
+      register: ps
+    - debug:
+        msg: " '{{ ps.stdout_lines }}' "
+# ansible-playbook -i hosts provisionar.yml -u ubuntu --private-key ~/Desktop/devops/treinamentoItau

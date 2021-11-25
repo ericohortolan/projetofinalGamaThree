@@ -1,0 +1,28 @@
+- hosts: all
+  environment:
+    DB_PASSWORD: "{{ lookup('env', 'DB_PASSWORD') }}"
+    SQL_PROD: "{{ lookup('env', 'SQL_PROD') }}"
+
+  become: yes
+  tasks:
+    - name: "Upload k8s-deploy"
+      copy:
+        src: "k8s-deploy"
+        dest: "~/"
+    - name: "Aplicar configmap prod"
+      shell: kubectl apply -f ~/mysql-configmap-prod.yml
+
+    - name: "Aplicar secret"
+      shell: kubectl apply -f ~/mysql-secret.yml
+
+    - name: "Aplicar deployment prod"
+      shell: kubectl apply -f ~/deployment-prod.yml
+
+    - name: "Aplicar nodeport prod"
+      shell: kubectl apply -f ~/nodeport-javadb-prod.yml
+
+    - shell: "kubectl get pods | grep mysql"
+      register: ps
+    - debug:
+        msg: " '{{ ps.stdout_lines }}' "
+# ansible-playbook -i hosts provisionar.yml -u ubuntu --private-key ~/Desktop/devops/treinamentoItau

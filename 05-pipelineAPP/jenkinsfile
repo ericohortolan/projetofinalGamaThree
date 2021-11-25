@@ -2,8 +2,10 @@ pipeline {
     agent any
 
     parameters {
-        string(name: 'DB_IP', defaultValue: '', description: 'IP do database para teste do pacote')
-        password(name: 'DB_PASSWORD', defaultValue: '', description: 'Senha do database para teste do pacote')  
+        password(name: 'DB_PASSWORD', defaultValue: '', description: 'Senha do database')  
+        string(name: 'SQL_DEV', defaultValue: '', description: 'IP do database de DEV')
+        string(name: 'SQL_STAG', defaultValue: '', description: 'IP do database de DEV')
+        string(name: 'SQL_PROD', defaultValue: '', description: 'IP do database de DEV')
     }
 
     stages {
@@ -35,7 +37,7 @@ pipeline {
 
         stage('Test App') {
             steps {
-                sh "export USER=root && export PASSWORD=\"$DB_PASSWORD\" && export DATABASE_URL='mysql://$DB_IP:3306/SpringWebYoutubeTest?useTimezone=true&serverTimezone=UTC' && cd app-code && ./mvnw test"
+                sh "export USER=root && export PASSWORD=\"$DB_PASSWORD\" && export DATABASE_URL='mysql://$SQL_DEV:3306/SpringWebYoutubeTest?useTimezone=true&serverTimezone=UTC' && cd app-code && ./mvnw test"
                 echo 'Testing....'
                 //sh 'nohup ./start.sh &'
                 //echo ' Starting....'
@@ -49,35 +51,25 @@ pipeline {
             }
         }
 
-  //      stage('BDD') {
-    //        steps {
-      //          git url: 'https://github.com/alexandreponte2/testeBDDjavamac.git', branch: 'main'
-        //        sh './mvnw test'
-          //  }
-       // }
-        //stage('K8s-DEV') {
-        //    steps {
-        //        git url: 'https://github.com/alexandreponte2/javapods.git', branch: 'main'
-        //        sh '/Users/alexandre.s.ponte/kubectl get nodes -o wide'
-        //        sh '/Users/alexandre.s.ponte/kubectl apply -f deployment-java-dev.yml'
-        //        sh '/Users/alexandre.s.ponte/kubectl apply -f nodeport-svc-java-dev.yml'
-        //    }
-        //}
-        //stage('K8s-QA') {
-        //    steps {
-        //        git url: 'https://github.com/alexandreponte2/javapods.git', branch: 'main'
-        //        sh '/Users/alexandre.s.ponte/kubectl get nodes -o wide'
-        //        sh '/Users/alexandre.s.ponte/kubectl apply -f deployment-java-qa.yml'
-        //        sh '/Users/alexandre.s.ponte/kubectl apply -f nodeport-svc-java-qa.yml'
-        //    }
-        //}
-        //stage('K8s-PROD') {
-        //    steps {
-        //        git url: 'https://github.com/alexandreponte2/javapods.git', branch: 'main'
-        //        sh '/Users/alexandre.s.ponte/kubectl get nodes -o wide'
-        //        sh '/Users/alexandre.s.ponte/kubectl apply -f deployment-java-prod.yml'
-        //        sh '/Users/alexandre.s.ponte/kubectl apply -f nodeport-svc-java-prod.yml'
-        //    }
-        //}
+        stage('Deploy Dev') {
+            steps {
+                sh 'chmod +x 05-pipelineAPP/deployDev.sh'
+                sh "04-pipelineSQL/deployDev.sh"
+            }
+        }
+
+        stage('Deploy Stag') {
+            steps {
+                sh 'chmod +x 05-pipelineAPP/deployStag.sh'
+                sh "04-pipelineSQL/deployStag.sh"
+            }
+        }
+
+        stage('Deploy Prod') {
+            steps {
+                sh 'chmod +x 05-pipelineAPP/deployProd.sh'
+                sh "04-pipelineSQL/deployProd.sh"
+            }
+        }
     }
 }
