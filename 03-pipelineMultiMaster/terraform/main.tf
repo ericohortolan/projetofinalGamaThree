@@ -143,6 +143,16 @@ resource "aws_security_group_rule" "Master_rule5" {
   source_security_group_id = "${aws_security_group.acessos_haproxy.id}"
 }
 
+# Workers -> Master
+resource "aws_security_group_rule" "Master_rule6" {
+  security_group_id        = "${aws_security_group.acessos_masters.id}"
+  type = "ingress"
+  from_port                = 0
+  to_port                  = 0
+  protocol                 = "-1"
+  source_security_group_id = "${aws_security_group.acessos_workers.id}"
+}
+
 ########
 
 
@@ -235,6 +245,18 @@ resource "aws_security_group_rule" "Worker_rule4" {
   type                     = "ingress"
   source_security_group_id = "${aws_security_group.acessos_haproxy.id}"
 }
+
+resource "aws_security_group_rule" "Worker_rule5" {
+  security_group_id        = "${aws_security_group.acessos_workers.id}"
+  type = "ingress"
+  description      = "Libera acesso k8s_workers"
+  from_port        = 0
+  prefix_list_ids  = []
+  protocol         = "-1"
+  self             = true
+  to_port          = 0
+}
+
 
 
 output "k8s-masters" {
