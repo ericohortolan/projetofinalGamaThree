@@ -64,6 +64,8 @@ Tecnologias que utilizamos para desenvolver este Projeto:
 $ git clone https://github.com/ericohortolan/projetofinalGamaThree.git
 ```
 
+Agora basta executar as pipelines pelo próprio Jenkins!
+  
 Tudo pronto! 
 
 
