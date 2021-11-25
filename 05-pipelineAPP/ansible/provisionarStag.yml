@@ -7,13 +7,13 @@
         dest: "~/"
 
     - name: "Aplicar configmap stage"
-      shell: kubectl apply -f ~/mysql-configmap-stage.yml
+      shell: kubectl apply -f ~/mysql-configmap-stag.yml
 
     - name: "Aplicar secret"
       shell: kubectl apply -f ~/mysql-secret.yml
 
     - name: "Aplicar deployment stage"
-      shell: kubectl apply -f ~/deployment-stage.yml
+      shell: kubectl apply -f ~/deployment-stag.yml
 
     - name: "Aplicar nodeport stage"
       shell: kubectl apply -f ~/nodeport-javadb-stag.yml
